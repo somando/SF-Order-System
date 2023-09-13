@@ -1,0 +1,43 @@
+{% extends "system/settings.html" %}
+{% load static %}
+{% block title %}{{ method }} Ticket{{ block.super }}{% endblock %}
+{% block setting %}
+    <script src="{% static 'addTicket.js' %}"></script>
+    <div class="setting">
+      <h2>{{ method }} Ticket</h2>
+      <form action="" method="post">
+        {% csrf_token %}
+        <p class="formItem">Menu</p>
+        <select name="menu" onchange="displayChange();" required id="menu">
+          <option value="None" selected>-- 選択してください --</option>
+          {% for menu in menus %}
+            <option value="{{ menu.id }}" 
+            {% if arr.0 == menu.id %}
+              selected
+            {% endif %}
+            >{{ menu.name }}</option>
+          {% endfor %}
+        </select>
+        <div class="disNone" style="display: none;">
+          <p class="formItem">Barcode</p>
+          <input type="text" name="barcode" placeholder="Barcode" value="{{ arr.1 }}" required>
+          <p class="formItem">Available</p>
+          <input type="checkbox" name="available" value="unavailable" class="formCheck" style="display: none;" checked>
+          <input type="checkbox" name="available" value="available" class="formCheck"
+          {% if arr.2 == True %}
+          checked
+          {% endif %}>
+          <label>チケットを利用可能にする</label>
+          <p class="formItem">Used</p>
+          <input type="checkbox" name="used" value="noUsed" class="formCheck" style="display: none;" checked>
+          <input type="checkbox" name="used" value="used" class="formCheck"
+          {% if arr.3 == True %}
+          checked
+          {% endif %}>
+          <label>チケットを使用済みにする</label>
+          <p><input type="submit" value="{{ method }}"></p>
+        </div>
+      </form>
+      <script>displayChange();</script>
+    </div>
+{% endblock %}

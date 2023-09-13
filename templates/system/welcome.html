@@ -1,0 +1,96 @@
+{% extends "system/layout.html" %}
+{% load static %}
+{% block title %}Welcome!{{ block.super }}{% endblock %}
+{% block main %}
+  <div style="font-size: min(7vh, 8vw); height: 105%;">
+    <h1>Welcome</h1>
+    <h1>To</h1>
+    <h1>Order</h1>
+    <h1>System</h1>
+  </div>
+  <span style="position: absolute; top: 95%; left: 50%; transform: translateX(-50%);"><a href="#howtouse" style="color: white; text-decoration: none;">| Scroll |</a></span>
+  <div style="margin: auto 5px; padding-bottom: 70px; width: fit-content;" id="howtouse">
+    <h1 class="welcome-title">How to Use?</h1>
+    <div class="howtouse">
+      <h2>1. Sign In</h2>
+      <p><span>Sign Inは</span><span>サイドバー内</span><span>下から3番目にある</span><span>アイコンです。</span></p>
+      <p><span>このシステムに</span><span>アクセスするには</span><span>全員サインインが必要です。</span></p>
+      <p><span>メンバーアカウントで</span><span>サインインすると</span><span>Backyardや</span><span>Order、</span><span>Messageの</span><span>全機能及び</span><span>Settingの閲覧が</span><span>可能です。</span></p>
+      <p><span>チケットアカウントで</span><span>サインインすると</span><span>Ticketにのみ</span><span>アクセス可能です。</span></p>
+      <p><span>アドミンアカウントで</span><span>サインインすると</span><span>全ての機能に</span><span>アクセス可能です。</span></p>
+      <h2>2. Backyard</h2>
+      <p><span>Backyardは</span><span>サイドバー内</span><span>上から1番目にある</span><span>アイコンです。</span></p>
+      <p><span>現在、</span><span>オーダーされていて</span><span>提供されていない</span><span>商品の</span><span>リストです。</span></p>
+      <div class="smartphone">
+        <p><span>スマホから</span><span>提供済みに</span><span>変更することは</span><span>できません。</span></p>
+      </div>
+      <div class="pc">
+        <p><span>パソコンからのみ</span><span>提供済みに</span><span>変更することが</span><span>できます。</span></p>
+        <p><span>ディスプレイは</span><span>自動で</span><span>更新されません。</span></p>
+        <p><span>通知は</span><span>LINEから届くため、</span><span>通知が届き次第、</span><span>Backyard横の</span><span>リロードボタンを</span><span>クリックしてください。</span></p>
+        <p><span>チェックボックスを</span><span>1回クリックしただけでは</span><span>画面から</span><span>消えない場合があります。</span><span>そのような場合は</span><span>再度チェックボックスを</span><span>クリックしてください。</span></p>
+        <p><span>間違えて</span><span>チェックボックスを</span><span>クリックした際は、</span><span>アドミンアカウントを</span><span>所有する人に</span><span>声をかけて</span><span>復元してもらってください。</span></p>
+      </div>
+      <h2>3. Order</h2>
+      <p><span>Orderは</span><span>サイドバー内</span><span>上から2番目にある</span><span>アイコンです。</span></p>
+      <div class="smartphone">
+        <p><span>テーブル番号を</span><span>選択することで</span><span>オーダーメニューの</span><span>登録が</span><span>可能です。</span></p>
+        <p><span>メッセージ欄には</span><span>トッピングや</span><span>デリバリー担当者名などを</span><span>記入してください。</span><span>Backyard画面に</span><span>入力した</span><span>メッセージが</span><span>表示されます。</span></p>
+        <p><span>注文後は</span><span>必ず</span><span>注文内容確認画面を</span><span>確認するように</span><span>してください。</span></p>
+        <p><span>注文の度に</span><span>メッセージ欄が</span><span>リセットされますので、</span><span>メッセージを</span><span>入力した際は</span><span>ご注意ください。</span></p>
+      </div>
+      <div class="pc">
+        <p><span>パソコン版では</span><span>基本的に</span><span>使用しません。</span></p>
+        <p><span>（テイクアウト対応などのために</span><span>有効化しています）</span></p>
+        <h2>4. Register</h2>
+        <p><span>Registerは</span><span>サイドバー内</span><span>上から3番目にある</span><span>アイコンです。</span></p>
+        <p><span>アドミンアカウントからのみ</span><span>使用できます。</span></p>
+        <p><span>使用する際にまずは</span><span>テーブル番号を</span><span>選択します。</span></p>
+        <p><span>提供済み表示に</span><span>なっている</span><span>商品しか</span><span>精算できません。</span></p>
+        <p><span>提供済みに</span><span>なっていない商品が</span><span>あったら、</span><span>お客様に</span><span>確認してください。</span></p>
+        <p><span>前売り券があったら、</span><span>Ticket Scannerを開いて、</span><span>バーコードを読み取り、</span><span>コードがあっていることを確認した後、</span><span>Submitを押します。</span></p>
+        <p><span>コードが有効化されていて、</span><span>まだ利用されていないコードであったら、</span><span>自動的に</span><span>お会計金額が</span><span>変更されます。</span></p>
+        <p><span>不手際により、</span><span>手動で値引きをする際には、</span><span>Discountに</span><span>金額を入力し、</span><span>Submitを押します。</span><span>これでお会計金額が</span><span>変更されます。</span></p>
+        <p><span>次のお客様が既に来店されている場合、</span><span>精算中のお客様のものではない商品が</span><span>同時に表示されてしまうことがあります。</span></p>
+        <p><span>そのような場合には、</span><span>Nextのチェックボックスへチェックを入れて、</span><span>Reflectボタンを押すことで</span><span>次回精算分に回すことができます。</span></p>
+        <p><span>店舗側であっていると判断した場合には、</span><span>Rotateボタンを押して</span><span>相手が見やすいように</span><span>金額表示を回転させます。</span></p>
+        <p><span>お客様に金額を確認してもらい、</span><span>あっている場合はこの時点で</span><span>お金を受け取り、</span><span>受け取った金額をDepositの部分へ入力し、</span><span>Changeボタンを押します。</span></p>
+        <p><span>お客様に見せている金額表示が</span><span>お釣りに変わりますので、</span><span>その金額をお客様へお渡しします。</span></p>
+        <p><span>料金を支払えるお金が</span><span>Depositに入力された際に</span><span>Payボタンを押せるようになります。</span><span>Payを押して</span><span>「ご利用ありがとうございました」と</span><span>画面が変わりましたら、</span><span>会計の終了です。</span></p>
+        <h2>5. Ticket</h2>
+      </div>
+      <div class="smartphone">
+        <h2>4. Ticket</h2>
+      </div>
+      <p><span>Ticketは</span><span>サイドバー内</span><span>上から4番目にある</span><span>アイコンです。</span></p>
+      <p><span>チケット裏面の</span><span>バーコードを</span><span>スキャンして</span><span>チケットを<span><span>有効化できます。</span></p>
+      <p><span>チケットの</span><span>有効化が</span><span>できていない場合、</span><span>会計が</span><span>できませんので、</span><span>必ず忘れずに</span><span>有効化を</span><span>するように</span><span>してください。</span></p>
+      <div class="smartphone">
+        <h2>5. Member</h2>
+      </div>
+      <div class="pc">
+        <h2>6. Member</h2>
+        <p><span>Memberは</span><span>サイドバー内</span><span>上から5番目にある</span><span>アイコンです。</span></p>
+      </div>
+      <p><span>全員に配布した</span><span>バーコードを</span><span>スキャンすることで</span><span>勤怠管理をしています。</span></p>
+      <p><span>勤務情報が</span><span>登録されていない人には</span><span>給料が支払われないことも</span><span>ありえますので、</span><span>必ず出勤時と退勤時に</span><span>アドミン権限を持つメンバーに</span><span>声をかけてスキャンしてください。</span></p>
+      <div class="smartphone">
+        <p><span>このメニューは</span><span>スマホから</span><span>アクセス</span><span>できません。</span></p>
+        <h2>6. Message</h2>
+      </div>
+      <div class="pc">
+        <h2>7. Message</h2>
+      </div>
+      <p><span>Messageは</span><span>サイドバー内</span><span>下から1番目にある</span><span>Setting内に</span><span>あります。</span></p>
+      <p><span>トッピングの在庫や</span><span>売上情報などの</span><span>共有事項に</span><span>利用します。</span></p>
+      <p><span>Messageに</span><span>登録された内容は</span><span>Setting以外の</span><span>ほとんどの</span><span>ページトップに</span><span>表示されます。</span></p>
+    </div>
+    <h1 class="welcome-title">Caution</h1>
+    <div class="howtouse">
+      <div class="smartphone">
+        <p><span>その他の</span><span>機能には</span><span>スマホから</span><span>アクセスできません。</span></p>
+      </div>
+      <p><span>ID及び</span><span>パスワードは</span><span>絶対に</span><span>共有しないで</span><span>ください。</span></p>
+    </div>
+  </div>
+{% endblock %}

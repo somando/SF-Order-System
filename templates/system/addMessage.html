@@ -1,0 +1,31 @@
+{% extends "system/settings.html" %}
+{% load static %}
+{% block title %}{{ method }} Message{{ block.super }}{% endblock %}
+{% block setting %}
+    <div class="setting">
+      <h2>{{ method }} Message</h2>
+      <form action="" method="post">
+        {% csrf_token %}
+        <select name="priority" required id="priority">
+          <option value="✅"
+          {% if arr.0 == "✅" %}
+            selected
+          {% endif %}
+          >1. お知らせ ✅</option>
+          <option value="⚠"
+          {% if arr.0 == "⚠" %}
+            selected
+          {% endif %}
+          >2. 注意 ⚠</option>
+          <option value="❌"
+          {% if arr.0 == "❌" %}
+            selected
+          {% endif %}
+          >3. 緊急 ❌</option>
+        </select>
+        <p class="formItem">message</p>
+        <textarea name="message">{{ arr.1 }}</textarea>
+        <p><input type="submit" value="{{ method }}"></p>
+      </form>
+    </div>
+{% endblock %}

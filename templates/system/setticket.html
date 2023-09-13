@@ -1,0 +1,58 @@
+{% extends "system/settings.html" %}
+{% load static %}
+{% block title %}Setting Ticket{{ block.super }}{% endblock %}
+{% block setting %}
+    <div class="setting">
+      <h2>Ticket</h2>
+      <table border="1">
+        <tr>
+          <th class="tableCell">ID</th>
+          <th class="tableCell">Menu</th>
+          <th class="tableCell">Barcode</th>
+          <th class="tableCell">Available</th>
+          <th class="tableCell">Used</th>
+          <th class="tableCell">Edit / Delete</th>
+        </tr>
+        {% for ticket in ticket_data %}
+        <tr id="{{ ticket.id }}">
+          <td class="tableCell">{{ ticket.id }}</td>
+          <td class="tableCell">
+            {% for menu in menus %}
+              {% if ticket.menu_id == menu.id %}
+                {{ menu.name }}
+              {% endif %}
+            {% endfor %}
+          </td>
+          <td class="tableCell">{{ ticket.barcode }}</td>
+          <td class="tableCell">
+            {% if ticket.available == True %}
+              利用可能
+            {% else %}
+              利用不可能
+            {% endif %}
+          </td>
+          <td class="tableCell">
+            {% if ticket.used == True %}
+              使用済み
+            {% else %}
+              未使用
+            {% endif %}
+          </td>
+          <td class="tableCell">
+            <a href="/settings/ticket/edit/{{ ticket.id }}">Edit</a> / 
+            <a href="/settings/ticket/delete/{{ ticket.id }}">Delete</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td class="tableCell" colspan="6">登録されているチケットがありません</td>
+        </tr>
+        {% endfor %}
+      </table>
+      <div id="settingMenu" style="margin-top: 20px;">
+        <ul style="padding-left: 0;">
+          <li><a href="/settings/ticket/add/">Add Ticket</a></li>
+        </ul>
+      </div>
+    </div>
+{% endblock %}

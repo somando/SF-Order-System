@@ -1,0 +1,7 @@
+{% extends "system/layout.html" %}
+{% load static %}
+{% block title %}403 Error{{ block.super }}{% endblock %}
+{% block main %}
+    <h1>{{ mode }}</h1>
+    <p>❌ アクセス権限がありません。</p>
+{% endblock %}

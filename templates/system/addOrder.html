@@ -1,0 +1,55 @@
+{% extends "system/settings.html" %}
+{% load static %}
+{% block title %}Edit Order{{ block.super }}{% endblock %}
+{% block setting %}
+    <div class="setting">
+      <h2>Edit Order</h2>
+      <form action="" method="post">
+        {% csrf_token %}
+        <p class="formItem">Table</p>
+        <select name="table" required>
+          {% for table in tables %}
+            <option value="{{ table.id }}" 
+            {% if arr.0 == table.id %}
+              selected
+            {% endif %}
+            >{{ table.name }}</option>
+          {% endfor %}
+        </select>
+        <p class="formItem">Menu</p>
+        <select name="menu" required>
+          {% for menu in menus %}
+            <option value="{{ menu.id }}" 
+            {% if arr.1 == menu.id %}
+              selected
+            {% endif %}
+            >{{ menu.name }}</option>
+          {% endfor %}
+        </select>
+        <p class="formItem">Count</p>
+        <input type="number" name="number" placeholder="Number" value="{{ arr.2 }}" required>
+        <p class="formItem">Provide</p>
+        <input type="checkbox" name="provide" value="wait" class="formCheck" style="display: none;" checked>
+        <input type="checkbox" name="provide" value="provide" class="formCheck"
+        {% if arr.3 == True %}
+        checked
+        {% endif %}>
+        <label>商品を提供済みとする</label>
+        <p class="formItem">Checkout</p>
+        <input type="checkbox" name="checkout" value="wait" class="formCheck" style="display: none;" checked>
+        <input type="checkbox" name="checkout" value="checkout" class="formCheck"
+        {% if arr.4 == True %}
+        checked
+        {% endif %}>
+        <label>商品を会計済みとする</label>
+        <p class="formItem">Next</p>
+        <input type="checkbox" name="next" value="now" class="formCheck" style="display: none;" checked>
+        <input type="checkbox" name="next" value="next" class="formCheck"
+        {% if arr.5 == True %}
+        checked
+        {% endif %}>
+        <label>商品を次回の会計にする</label>
+        <p><input type="submit" value="{{ method }}"></p>
+      </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,110 @@
+{% extends "system/register.html" %}
+{% load static %}
+{% load humanize %}
+{% block title %}Register ({{ select.name }}){{ block.super }}{% endblock %}
+{% block register %}
+<div id="settingMenu" class="menuBar" style="width: 650px;">
+  <ul>
+    {% for table in tables %}
+    <li><a href="/register/{{ table.id }}">{{ table.name }}</a></li>
+    {% endfor %}
+  </ul>
+</div>
+<script src="{% static 'register.js' %}"></script>
+<div id="register">
+  <div class="content" id="scanner">
+    <div style="display: flex; width: 700px;">
+      <h2 style="color: white;">Ticket Scanner</h2>
+      <button id="opencloseButtonBar" class="opencloseButton" type="button" onclick="opencloseBarcode();">Open</button>
+    </div>
+    <div id="scanner-element">
+      <div id="barcode-scanner"></div>
+      <div style="margin-top: 20px; margin-bottom:50px; width: 700px;">
+        <form action="/register/ticket/" method="post">
+          {% csrf_token %}
+          <input type="number" name="table" value="{{ select.id }}" style="display: none;">
+          <input type="text" name="barcode" id="ticketid" class="inputBarcode"></input>
+          <input type="submit" id="submitBar" value="Submit">
+        </form>
+      </div>
+    </div>
+    <script src="{% static 'quagga.min.js' %}"></script>
+    <script src="{% static 'barcode.js' %}"></script>
+    <div style="display: flex; width: 700px;">
+      <h2 style="color: white;">Discount</h2>
+      <button id="opencloseButtonDis" class="opencloseButton" type="button" onclick="opencloseDiscount();">Open</button>
+    </div>
+    <div style="margin-top: 20px; margin-bottom:50px; width: 700px; display: none;" id="discountPriceContent">
+      <form action="/register/discount/" method="post">
+        {% csrf_token %}
+        <input type="number" name="table" value="{{ select.id }}" style="display: none;">
+        <input type="number" name="discountPrice" id="discountPrice" class="inputBarcode" value="0"></input>
+        <input type="submit" id="submitDis" value="Submit">
+      </form>
+    </div>
+  </div>
+  <div class="content" style="transform: translateY(-75px); width: 100%;">
+    <div class="norotate" id="regiPrice">
+      <div id="price">
+        <div style="display: flex;">
+          <h2 style="color: white;" id="modeName">Price</h2>
+          <button class="opencloseButton" type="button" onclick="rotate();">Rotate</button>
+        </div>
+        <p><span id="regiPriceNum">{{ price| intcomma }}</span> 円</p>
+        <input type="number" name="priceValue" id="priceValue" value="{{ price }}" style="display: none;">
+      </div>
+      <div id="regiOrdermenu">
+        <form action="/register/next/" method="post">
+          {% csrf_token %}
+          <input type="number" name="table" value="{{ select.id }}" style="display: none;">
+          <table border="1">
+            <tr>
+              <th class="tableCell">Next</th>
+              <th class="tableCell">Name</th>
+              <th class="tableCell">Price</th>
+            </tr>
+            <tr id="depositRow" style="display: none;">
+              <td class="tableCell" colspan="2">お預かり</td>
+              <td class="tableCell" id="depositTable">0 円</td>
+            </tr>
+            {% for order in orders %}
+            <tr>
+              <td class="tableCell">
+                <input type="checkbox" name="next[]" value="{{ order.0 }}">
+              </td>
+              <td class="tableCell">
+                {{ order.1 }}
+                {% if order.2 > 1 %}
+                  <span class="itemNumber" style="color: #ff6363;"> × {{ order.2| intcomma }}</span>
+                {% endif %}
+              </td>
+              <td class="tableCell">{{ order.3| intcomma }} 円</td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td class="tableCell" colspan="3">登録されているオーダーがありません</td>
+            </tr>
+            {% endfor %}
+            {% if orders|length > 0 %}
+              <tr>
+                <td class="tableCell" colspan="2">前売り券 / 値引き</td>
+                <td class="tableCell">- {{ discount| intcomma }} 円</td>
+              </tr>
+            {% endif %}
+          </table>
+          <input type="submit" id="submitDis" value="Reflect">
+        </form>
+      </div>
+    </div>
+    <div id="calculate">
+      <input type="number" name="deposit" id="deposit" class="inputBarcode" placeholder="Deposit" onchange="change();"></input>
+      <button id="changeButton" class="opencloseButton" type="button" onclick="change();" style="margin: 20px 0 0 0;">Change</button>
+      <form action="" method="post">
+        {% csrf_token %}
+        <input type="number" name="table" value="{{ select.id }}" style="display: none;">
+        <input type="submit" id="submitPay" value="Pay" disabled>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

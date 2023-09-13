@@ -1,0 +1,11 @@
+{% extends "system/settings.html" %}
+{% load static %}
+{% block title %}Setting Ticket{{ block.super }}{% endblock %}
+{% block setting %}
+    <div class="setting">
+      <h2>Ticket</h2>
+      <p>❌ チケットデータの変更に失敗しました。</p>
+      <p>変更するには以下の条件を満たしている必要があります。</p>
+      <p>・Barcodeが一意である</p>
+    </div>
+{% endblock %}

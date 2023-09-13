@@ -1,0 +1,45 @@
+{% extends "system/settings.html" %}
+{% load static %}
+{% block title %}Setting Shift{{ block.super }}{% endblock %}
+{% block setting %}
+    <div class="setting">
+      <h2>Shift</h2>
+      <table border="1">
+        <tr>
+          <th class="tableCell">ID</th>
+          <th class="tableCell">Name</th>
+          <th class="tableCell">Start</th>
+          <th class="tableCell">Finish</th>
+          <th class="tableCell">Edit / Delete</th>
+        </tr>
+        {% for shift in shifts %}
+        <tr id="{{ shift.id }}">
+          <td class="tableCell">{{ shift.id }}</td>
+          <td class="tableCell">
+            {% for member in members %}
+              {% if member.id == shift.member_id %}
+                {{ member.name }}
+              {% endif %}
+            {% endfor %}
+          </td>
+          <td class="tableCell">{{ shift.start }}</td>
+          <td class="tableCell">{{ shift.finish }}</td>
+          <td class="tableCell">
+            <a href="/settings/shift/edit/{{ shift.id }}">Edit</a>  /
+            <a href="/settings/shift/delete/{{ shift.id }}">Delete</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td class="tableCell" colspan="5">登録されているシフトがありません</td>
+        </tr>
+        {% endfor %}
+      </table>
+      
+      <div id="settingMenu" style="margin-top: 20px;">
+        <ul style="padding-left: 0;">
+          <li><a href="/settings/shift/add/">Add Shift</a></li>
+        </ul>
+      </div>
+    </div>
+{% endblock %}

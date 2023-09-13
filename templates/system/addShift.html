@@ -1,0 +1,47 @@
+{% extends "system/settings.html" %}
+{% load static %}
+{% block title %}{{ method }} Shift{{ block.super }}{% endblock %}
+{% block setting %}
+    <div class="setting">
+      <h2>{{ method }} Shift</h2>
+      <form action="" method="post">
+        {% csrf_token %}
+        <p class="formItem">Member</p>
+        <select name="member" id="table" required>
+          <option value="None" disabled selected>-- 選択してください --</option>
+          {% for member in members %}
+            <option value="{{ member.id }}" 
+            {% if arr.0 == member.id %}
+              selected
+            {% endif %}
+            >{{ member.name }}</option>
+          {% empty %}
+            <option value="None" disabled>メンバーがいません</option>
+          {% endfor %}
+        </select>
+        <p class="formItem">Start</p>
+        <input type="datetime-local" id="start" name="start" value="{{ arr.1 }}" onchange="checkData();" required>
+        <p class="formItem">Finish</p>
+        <input type="datetime-local" id="finish" name="finish" value="{{ arr.2 }}" onchange="checkData();" required>
+        <p><input type="submit" value="{{ method }}" id="submitShift" disabled></p>
+      </form>
+    </div>
+    <script>
+      function checkData() {
+        const start = document.getElementById("start");
+        const finish = document.getElementById("finish");
+        const submit = document.getElementById("submitShift");
+        if (start.value < finish.value) {
+          submit.removeAttribute('disabled');
+        } else {
+          submit.setAttribute('disabled', true);
+        }
+        if (start.value != "" && finish.value != "" && start.value >= finish.value) {
+          alert("StartよりもFinishが後である必要があります。\n値を変更してください。")
+        }
+        if (start.value != "" && finish.value == "") {
+          finish.value = start.value;
+        }
+      }
+    </script>
+{% endblock %}

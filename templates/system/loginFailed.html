@@ -1,0 +1,21 @@
+{% extends "system/layout.html" %}
+{% load static %}
+{% block title %}Login{{ block.super }}{% endblock %}
+{% block main %}
+<h1>Sign In</h1>
+<div id="message">
+{% for message in messages %}
+  <p>{{ message.priority }} {{ message.message }}</p>
+{% endfor %}
+</div>
+{% if request.user.is_authenticated %}
+  <div style="margin-top: 100px; font-size: 19px;">
+    <p>✅ ログインに成功しました。</p>
+  </div>
+{% else %}
+  <div style="margin-top: 100px; font-size: 19px;">
+    <p>❌ ログインに失敗しました。</p>
+    <a href="{% url 'system:login' %}" style="color: white;">ログインへ戻る ></a>
+  </div>
+{% endif %}
+{% endblock %}

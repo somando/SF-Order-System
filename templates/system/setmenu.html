@@ -1,0 +1,47 @@
+{% extends "system/settings.html" %}
+{% load static %}
+{% block title %}Setting Menu{{ block.super }}{% endblock %}
+{% block setting %}
+    <div class="setting">
+      <h2>Menu</h2>
+      <table border="1">
+        <tr>
+          <th class="tableCell">ID</th>
+          <th class="tableCell">Name</th>
+          <th class="tableCell">Price</th>
+          <th class="tableCell">Count</th>
+          <th class="tableCell">Sold Out</th>
+          <th class="tableCell">Edit / Delete</th>
+        </tr>
+        {% for menu in menu_data %}
+        <tr id="{{ menu.id }}">
+          <td class="tableCell">{{ menu.id }}</td>
+          <td class="tableCell">{{ menu.name }}</td>
+          <td class="tableCell">{{ menu.price }} 円</td>
+          <td class="tableCell">{{ menu.count }} 点</td>
+          <td class="tableCell">
+            {% if menu.soldout %}
+              売り切れ中
+            {% else %}
+              販売中
+            {% endif %}
+          </td>
+          <td class="tableCell">
+            <a href="/settings/menu/edit/{{ menu.id }}">Edit</a>  /
+            <a href="/settings/menu/delete/{{ menu.id }}">Delete</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td class="tableCell" colspan="6">登録されているメニューがありません</td>
+        </tr>
+        {% endfor %}
+      </table>
+      
+      <div id="settingMenu" style="margin-top: 20px;">
+        <ul style="padding-left: 0;">
+          <li><a href="/settings/menu/add/">Add Menu</a></li>
+        </ul>
+      </div>
+    </div>
+{% endblock %}

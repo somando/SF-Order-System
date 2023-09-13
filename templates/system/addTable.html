@@ -1,0 +1,29 @@
+{% extends "system/settings.html" %}
+{% load static %}
+{% block title %}{{ method }} Table{{ block.super }}{% endblock %}
+{% block setting %}
+    <div class="setting">
+      <h2>{{ method }} Table</h2>
+      <form action="" method="post">
+        {% csrf_token %}
+        <p class="formItem">Name</p>
+        <input type="text" name="name" placeholder="Name" value="{{ arr.0 }}" required>
+        <p class="formItem">Use</p>
+        <input type="checkbox" name="use" value="noUse" class="formCheck" style="display: none;" checked>
+        <input type="checkbox" name="use" value="using" class="formCheck"
+        {% if arr.1 == True %}
+        checked
+        {% endif %}>
+        <label>使用中表示にする</label>
+        <div>
+          <p class="formItem">Message</p>
+          <textarea name="message">{{ arr.2 }}</textarea>
+        </div>
+        <p class="formItem">Ticket Price</p>
+        <input type="number" name="ticket" placeholder="Ticket" value="{{ arr.3 }}" required>
+        <p class="formItem">Discount</p>
+        <input type="number" name="discount" placeholder="Discount" value="{{ arr.4 }}" required>
+        <p><input type="submit" value="{{ method }}"></p>
+      </form>
+    </div>
+{% endblock %}

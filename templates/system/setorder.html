@@ -1,0 +1,71 @@
+{% extends "system/settings.html" %}
+{% load static %}
+{% block title %}Setting Order{{ block.super }}{% endblock %}
+{% block setting %}
+    <div class="setting">
+      <h2>Order</h2>
+      <table border="1">
+        <tr>
+          <th class="tableCell">ID</th>
+          <th class="tableCell">Order Time</th>
+          <th class="tableCell">Table</th>
+          <th class="tableCell">Menu</th>
+          <th class="tableCell">Count</th>
+          <th class="tableCell">Provide</th>
+          <th class="tableCell">Checkout</th>
+          <th class="tableCell">Next</th>
+          <th class="tableCell">Edit / Delete</th>
+        </tr>
+        {% for order in order_data %}
+        <tr id="{{ order.id }}">
+          <td class="tableCell">{{ order.id }}</td>
+          <td class="tableCell">{{ order.order_time }}</td>
+          <td class="tableCell">
+            {% for table in tables %}
+              {% if order.table_id == table.id %}
+                {{ table.name }}
+              {% endif %}
+            {% endfor %}
+          </td>
+          <td class="tableCell">
+            {% for menu in menus %}
+              {% if order.menu_id == menu.id %}
+                {{ menu.name }}
+              {% endif %}
+            {% endfor %}
+          </td>
+          <td class="tableCell">{{ order.count }}</td>
+          <td class="tableCell">
+            {% if order.provide == True %}
+              提供済み
+            {% else %}
+              未提供
+            {% endif %}
+          </td>
+          <td class="tableCell">
+            {% if order.checkout == True %}
+              精算済み
+            {% else %}
+              未精算
+            {% endif %}
+          </td>
+          <td class="tableCell">
+            {% if order.next == True %}
+              次回
+            {% else %}
+              今回
+            {% endif %}
+          </td>
+          <td class="tableCell">
+            <a href="/settings/order/edit/{{ order.id }}">Edit</a> / 
+            <a href="/settings/order/delete/{{ order.id }}">Delete</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td class="tableCell" colspan="9">登録されているオーダーがありません</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+{% endblock %}

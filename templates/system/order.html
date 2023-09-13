@@ -1,0 +1,56 @@
+{% extends "system/layout.html" %}
+{% load static %}
+{% block title %}Order{{ block.super }}{% endblock %}
+{% block main %}
+    <script src="{% static 'order.js' %}"></script>
+    <h1>Order</h1>
+    <div id="message">
+    {% for message in messages %}
+      <p>{{ message.priority }} {{ message.message }}</p>
+    {% endfor %}
+    </div>
+    <form action="" method="post" id="orderForm">
+      {% csrf_token %}
+      <div id="orderItem">
+        <p class="formItem">Table</p>
+        <select name="table" onchange="displayChange();" id="table">
+          <option value="None" selected>-- 選択してください --</option>
+          {% for table in tables %}
+            <option value="{{ table.id }}">{{ table.name }}</option>
+          {% empty %}
+            <option value="None" disabled>テーブルがありません。</option>
+          {% endfor %}
+        </select>
+        <table border="1" style="margin-top: 50px; display: none;" class="disNone">
+          <tr>
+            <th class="tableCell">Menu</th>
+            <th class="tableCell">Count</th>
+          </tr>
+          {% for menu in menus %}
+          <tr>
+            <td class="tableCell">{{ menu.name }}</td>
+            <td class="tableCell">
+              {% if menu.soldout %}
+                売り切れ
+                <input type="number" value=0 style="display: none; width: 30px;" id="count_{{ menu.id }}" name="{{ menu.id }}">
+              {% else %}
+                <button type="button" onclick="subCount({{ menu.id }});" class="plusminus">-</button>
+                <input type="number" value=0 style="width: 30px;" id="count_{{ menu.id }}" name="{{ menu.id }}">
+                <button type="button" onclick="addCount({{ menu.id }});" class="plusminus">+</button>
+              {% endif %}
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td class="tableCell" colspan="2">登録されているメニューがありません</td>
+          </tr>
+          {% endfor %}
+        </table>
+        <div style="display: none;" class="disNone">
+          <p class="formItem">Message</p>
+          <textarea name="message"></textarea>
+        </div>
+        <p style="display: none;" class="disNone"><input type="submit" value="Submit" style="color: black; margin-bottom: 30px;"></p>
+      </div>
+    </form>
+{% endblock %}

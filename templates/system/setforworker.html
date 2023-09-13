@@ -1,0 +1,37 @@
+{% extends "system/settings.html" %}
+{% load static %}
+{% block title %}Setting Message{{ block.super }}{% endblock %}
+{% block setting %}
+    <div class="setting">
+      <h2>Message</h2>
+      <table border="1">
+        <tr>
+          <th class="tableCell">ID</th>
+          <th class="tableCell">Priority</th>
+          <th class="tableCell">Message</th>
+          <th class="tableCell">Edit / Delete</th>
+        </tr>
+        {% for message in messages %}
+        <tr id="{{ message.id }}">
+          <td class="tableCell">{{ message.id }}</td>
+          <td class="tableCell">{{ message.priority }}</td>
+          <td class="tableCell">{{ message.message }}</td>
+          <td class="tableCell">
+            <a href="/settings/message/edit/{{ message.id }}">Edit</a>  /
+            <a href="/settings/message/delete/{{ message.id }}">Delete</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td class="tableCell" colspan="4">登録されているメッセージがありません</td>
+        </tr>
+        {% endfor %}
+      </table>
+      
+      <div id="settingMenu" style="margin-top: 20px;">
+        <ul style="padding-left: 0;">
+          <li><a href="/settings/message/add/">Add Message</a></li>
+        </ul>
+      </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "system/layout.html" %}
+{% load static %}
+{% block title %}Sign In{{ block.super }}{% endblock %}
+{% block main %}
+<h1>Sign Up</h1>
+<div id="message">
+{% for message in messages %}
+  <p>{{ message.priority }} {{ message.message }}</p>
+{% endfor %}
+</div>
+{% if AccountCreate %}
+<h2>Create Successful</h2>
+{% else %}
+  <table>
+    <form enctype="multipart/form-data" method="post">
+      {% csrf_token %}
+      {{ account_form.as_table }}
+      {{ add_account_form.as_table }}
+      <tr><td></td><td>
+        <p><input type="submit" value="Sign Up"></p>
+      </td></tr>
+    </form>
+  </table>
+{% endif %}
+{% endblock %}

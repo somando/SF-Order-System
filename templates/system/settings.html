@@ -1,0 +1,18 @@
+{% extends "system/layout.html" %}
+{% load static %}
+{% block main %}
+    <h1>Settings</h1>
+    <div id="settingMenu" class="menuBar">
+      <ul>
+        <li><a href="/settings/message/">Message</a></li>
+        <li><a href="/settings/order/">Order</a></li>
+        <li><a href="/settings/member/">Member</a></li>
+        <li><a href="/settings/menu/">Menu</a></li>
+        <li><a href="/settings/table/">Table</a></li>
+        <li><a href="/settings/ticket/">Ticket</a></li>
+        <li><a href="/settings/shift/">Shift</a></li>
+      </ul>
+    </div>
+    {% block setting %}
+    {% endblock %}
+{% endblock %}

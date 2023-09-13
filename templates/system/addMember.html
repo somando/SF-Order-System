@@ -1,0 +1,32 @@
+{% extends "system/settings.html" %}
+{% load static %}
+{% block title %}{{ method }} Member{{ block.super }}{% endblock %}
+{% block setting %}
+    <div class="setting">
+      <h2>{{ method }} Member</h2>
+      <form action="" method="post">
+        {% csrf_token %}
+        <p class="formItem">Name</p>
+        <input type="text" name="name" placeholder="Name" value="{{ arr.0 }}" required>
+        <p class="formItem">No.</p>
+        <input type="number" name="number" placeholder="Number" value="{{ arr.1 }}" required>
+        <p class="formItem">Barcode</p>
+        <input type="text" name="barcode" placeholder="Barcode" value="{{ arr.2 }}" required>
+        <p class="formItem">Work</p>
+        <input type="checkbox" name="work" value="noWork" class="formCheck" style="display: none;" checked>
+        <input type="checkbox" name="work" value="working" class="formCheck"
+        {% if arr.4 == True %}
+        checked
+        {% endif %}>
+        <label>勤務中表示にする</label>
+        <p class="formItem">Admin</p>
+        <input type="checkbox" name="admin" value="Member" class="formCheck" style="display: none;" checked>
+        <input type="checkbox" name="admin" value="Admin" class="formCheck"
+        {% if arr.3 == True %}
+        checked
+        {% endif %}>
+        <label>管理者権限を付与する</label>
+        <p><input type="submit" value="{{ method }}"></p>
+      </form>
+    </div>
+{% endblock %}

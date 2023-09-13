@@ -1,0 +1,55 @@
+{% extends "system/settings.html" %}
+{% load static %}
+{% block title %}Setting Member{{ block.super }}{% endblock %}
+{% block setting %}
+    <div class="setting">
+      <h2>Member</h2>
+      <table border="1">
+        <tr>
+          <th class="tableCell">ID</th>
+          <th class="tableCell">Name</th>
+          <th class="tableCell">No.</th>
+          <th class="tableCell">Barcode</th>
+          <th class="tableCell">Current</th>
+          <th class="tableCell">Admin</th>
+          <th class="tableCell">Edit / Delete</th>
+        </tr>
+        {% for member in member_data %}
+        <tr id="{{ member.id }}">
+          <td class="tableCell">{{ member.id }}</td>
+          <td class="tableCell">{{ member.name }}</td>
+          <td class="tableCell">{{ member.member_no }}</td>
+          <td class="tableCell">{{ member.barcode }}</td>
+          <td class="tableCell">
+            {% if member.work == True %}
+              出勤中
+            {% else %}
+              退勤中
+            {% endif %}
+          </td>
+          <td class="tableCell">
+            {% if member.admin == True %}
+              管理者
+            {% else %}
+              メンバー
+            {% endif %}
+          </td>
+          <td class="tableCell">
+            <a href="/settings/member/edit/{{ member.id }}">Edit</a>  /
+            <a href="/settings/member/delete/{{ member.id }}">Delete</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td class="tableCell" colspan="7">登録されているメンバーがいません</td>
+        </tr>
+        {% endfor %}
+      </table>
+      
+      <div id="settingMenu" style="margin-top: 20px;">
+        <ul style="padding-left: 0;">
+          <li><a href="/settings/member/add/">Add Member</a></li>
+        </ul>
+      </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "system/layout.html" %}
+{% load static %}
+{% block title %}Ticket Detail{{ block.super }}{% endblock %}
+{% block main %}
+    <h1>Ticket</h1>
+    <div id="message">
+    {% for message in messages %}
+      <p>{{ message.priority }} {{ message.message }}</p>
+    {% endfor %}
+    </div>
+    <div id="orders" style="display: block; color: white;">
+      <h2>Result</h2>
+      <p class="formItem">ID</p>
+      <p>　{{ ticket.id }}</p>
+      <p class="formItem">Menu</p>
+      <p>
+        {% for menu in menus %}
+          {% if menu.id == ticket.menu_id %}
+          　{{ menu.name }}
+          {% endif %}
+        {% endfor %}
+      </p>
+      <p class="formItem">Available</p>
+      {% if ticket.available %}
+        　利用可能
+      {% else %}
+        　利用不可能
+      {% endif %}
+      <div id="settingMenu" style="margin-top: 40px; display: block;">
+        <ul style="padding: 0;">
+          <li><a href="/ticket/">Back to Ticket</a></li>
+        </ul>
+      </div>
+    </div>
+    <script>
+      alert('{{ ticket.barcode }}を{{ available }}しました。');
+    </script>
+{% endblock %}

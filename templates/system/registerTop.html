@@ -1,0 +1,17 @@
+{% extends "system/register.html" %}
+{% load static %}
+{% block title %}Register{{ block.super }}{% endblock %}
+{% block register %}
+<div id="settingMenu" class="menuBar">
+  <ul>
+    {% for table in tables %}
+      <li><a href="/register/{{ table.id }}">{{ table.name }}</a></li>
+    {% empty %}
+      <p style="color: white;">テーブルが登録されていません。</p>
+    {% endfor %}
+  </ul>
+</div>
+<div style="color: white; margin-left: 40px;">
+  <h2>上記メニューバーよりテーブルを選択してください</h2>
+</div>
+{% endblock %}

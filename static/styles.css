@@ -4,6 +4,7 @@ html, body {
   color: #fff;
   height: 100%;
   letter-spacing: 5px;
+  font-family: sans-serif;
 }
 
 .menuIcon {
@@ -37,16 +38,16 @@ nav a {
   transform: translateX(-50%);
 }
 
-ul {
-  list-style: none;
-  width: 0;
-}
-
 main {
   margin-left: 57px;
   padding: 27px 50px;
   height: calc(100% - 54px);
   width: calc(100% - 157px);
+}
+
+.formCheck {
+  transform: translateY(0) scale(1);
+  margin: 0;
 }
 
 #orders {
@@ -76,17 +77,10 @@ h1 {
 
 .orderMenu {
   font-size: 25px;
-  height: 170px;
+  height: 220px;
   overflow-x: hidden;
   overflow-y: scroll;
   padding-left: 7px;
-}
-
-@media screen and (max-width: 700px) {
-  .order {
-    height: fit-content;
-    margin: max(2%, 20px) 0;
-  }
 }
 
 .order h2 {
@@ -94,7 +88,7 @@ h1 {
   font-size: 30px;
 }
 
-input[type=checkbox] {
+.orderMenu input[type=checkbox] {
   transform: translateY(-3px) scale(2);
   margin: 0 15px 0 0;
 }
@@ -107,4 +101,332 @@ input[type=checkbox] {
   text-align: right;
   right: 0;
   font-size: 25px;
+}
+
+#barcode-scanner {
+  width: min(500px, 100%);
+  height: auto;
+}
+
+#barcode-scanner > video, #barcode-scanner > canvas {
+  width: 90%;
+}
+
+.barcodeValue {
+  margin-top: 0px;
+}
+
+canvas {
+  display: none;
+}
+
+.inputBarcode {
+  font-size: 20px;
+}
+
+#submit {
+  font-size: 30px;
+}
+
+.eachButton {
+  margin: 30px; 
+  height: 100px; 
+  width: 150px; 
+  font-size: 30px;
+}
+
+#settingMenu {
+  display: inline-block;
+  color: #2a2a2a;
+  white-space: nowrap;
+}
+
+.menuBar {
+  width: calc(100%);
+  overflow-x: scroll;
+}
+
+#settingMenu ul {
+  display: flex;
+  margin-right: 50px;
+}
+
+#settingMenu li {
+  width: fit-content;
+  list-style: none;
+  margin-right: 10px;
+  padding: 5px 20px;
+  background-color: #fff;
+  border-radius: 35px;
+}
+
+#settingMenu a {
+  color: #2a2a2a;
+  text-decoration: none;
+}
+
+#settingMenu a:hover {
+  color: #c0c0c0;
+}
+
+.setting {
+  padding: 27px 50px;
+  width: calc(100% - 75px);
+  height: calc(100% - 170px);
+  overflow-x: scroll;
+  overflow-y: scroll;
+  padding-top: 0;
+}
+
+.tableCell {
+  height: 50px;
+  padding: 0 30px;
+}
+
+.tableCell a {
+  color: #fff;
+}
+
+.formItem {
+  padding-top: 20px;
+}
+
+table[border="1"] {
+  border-spacing: 0;
+  margin-top: 25px;
+  margin-bottom: 5px;
+  border: none;
+}
+
+table[border="1"] td, table[border="1"] th {
+	border: none;
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #fff;
+}
+
+input[type=text], input[type=datetime-local], input[type=number], input[type=password] {
+  height: 30px;
+  padding: 3px 10px;
+}
+
+select {
+  width: 195px;
+  height: 36px;
+  padding: 3px 10px;
+}
+
+input[type=submit] {
+  color: #000;
+  margin-top: 20px;
+  width: fit-content;
+  margin-right: 10px;
+  padding: 5px 20px;
+  background-color: #fff;
+  border-radius: 35px;
+  letter-spacing: 5px;
+  font-family: sans-serif;
+  font-size: 17px;
+}
+
+#orderItem {
+  height: calc(100% - 66px);
+}
+
+#orderForm {
+  height: calc(100% - 100px);
+}
+
+.plusminus {
+  height: 34px;
+  width: 34px;
+  padding: 0;
+}
+
+textarea {
+  width: 173px;
+  height: 100px;
+  padding: 10px;
+}
+
+#register {
+  margin-left: 40px;
+  display: flex;
+  width: 700px;
+}
+
+#scanner {
+  width: fit-content;
+  height: 100px;
+}
+
+#regiPrice {
+  width: 500px; 
+  height: fit-content; 
+  margin-right: 0;
+  white-space: nowrap;
+}
+
+.rotate {
+  transform: rotateZ(180deg);
+}
+
+#regiPriceNum {
+  font-size: 120px;
+}
+
+#thankyou {
+  text-align: center;
+  transform: rotateZ(180deg);
+}
+
+.opencloseButton {
+  margin: auto;
+  margin-left: 40px;
+  padding: 5px 20px;
+  letter-spacing: 3px;
+  font-size: 20px;
+  width: fit-content;
+  background-color: #fff;
+  border-radius: 35px;
+  letter-spacing: 5px;
+  font-family: sans-serif;
+  font-size: 17px;
+}
+
+#scanner-element {
+  display: none;
+}
+
+#calculate {
+  margin-top: 30px;
+} 
+
+#hamburger {
+  display: none;
+}
+
+.smartphone {
+  display: none;
+}
+
+.howtouse {
+  line-height: 2em;
+}
+
+.howtouse h2 {
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.howtouse span {
+  display: inline-block;
+}
+
+.welcome-title {
+  margin-top: 50px;
+}
+
+.shiftTitle {
+  margin-top: 40px;
+}
+
+@media screen and (max-width: 700px) {
+
+  .smartphone {
+    display: block;
+  }
+
+  .pc {
+    display: none;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  #orders {
+    padding-bottom: 50px;
+  }
+
+  .order {
+    height: fit-content;
+    width: calc(100% - 60px);
+    margin: max(2%, 20px) 0;
+    padding: 30px;
+  }
+
+  #message {
+    width: 100%;
+  }
+
+  .order h2 {
+    font-size: 23px;
+  }
+
+  .formItem {
+    width: 97%;
+  }
+
+  .orderMenu {
+    height: fit-content;
+    font-size: 20px;
+  }
+
+  .orderMenu p {
+    font-size: 20px;
+  }
+
+  .orderMenu input[type=checkbox] {
+    transform: scale(1);
+  }
+
+  #orderItem {
+    width: 100%;
+  }
+
+  #orderItem table {
+    width: 100%;
+    white-space: nowrap;
+    overflow-x: scroll;
+  }
+
+  #orderForm {
+    height: calc(97% - 78px);
+    width: 100%;
+    overflow-y: scroll;
+  }
+
+  nav {
+    display: none;
+  }
+
+  main {
+    margin-left: 0;
+    padding: 27px 15px;
+    height: calc(100% - 54px);
+    width: calc(100% - 30px);
+  }
+
+  #hamburger {
+    display: block;
+  }
+
+  #settingMenu ul {
+    padding-left: 0;
+  }
+
+  .setting {
+    width: 100%;
+    padding: 0;
+  }
+
+  .tableCell {
+    font-size: 10px;
+    padding: 0 10px;
+  }
+
+  #barcodeValue {
+    margin-top: 90px;
+    transform: 0;
+  }
 }

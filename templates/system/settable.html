@@ -1,0 +1,49 @@
+{% extends "system/settings.html" %}
+{% load static %}
+{% block title %}Setting Table{{ block.super }}{% endblock %}
+{% block setting %}
+    <div class="setting">
+      <h2>Table</h2>
+      <table border="1">
+        <tr>
+          <th class="tableCell">ID</th>
+          <th class="tableCell">Name</th>
+          <th class="tableCell">Current</th>
+          <th class="tableCell">Message</th>
+          <th class="tableCell">Ticket</th>
+          <th class="tableCell">Discount</th>
+          <th class="tableCell">Edit / Delete</th>
+        </tr>
+        {% for table in table_data %}
+        <tr id="{{ table.id }}">
+          <td class="tableCell">{{ table.id }}</td>
+          <td class="tableCell">{{ table.name }}</td>
+          <td class="tableCell">
+            {% if table.use == True %}
+              使用中
+            {% else %}
+              空き
+            {% endif %}
+          </td>
+          <td class="tableCell">{{ table.message }}</td>
+          <td class="tableCell">{{ table.ticket_price }} 円</td>
+          <td class="tableCell">{{ table.discount }} 円</td>
+          <td class="tableCell">
+            <a href="/settings/table/edit/{{ table.id }}">Edit</a>  /
+            <a href="/settings/table/delete/{{ table.id }}">Delete</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td class="tableCell" colspan="7">登録されているテーブルがありません</td>
+        </tr>
+        {% endfor %}
+      </table>
+      
+      <div id="settingMenu" style="margin-top: 20px;">
+        <ul style="padding-left: 0;">
+          <li><a href="/settings/table/add/">Add Table</a></li>
+        </ul>
+      </div>
+    </div>
+{% endblock %}

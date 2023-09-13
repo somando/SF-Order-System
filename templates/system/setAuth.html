@@ -1,0 +1,19 @@
+{% extends "system/layout.html" %}
+{% load static %}
+{% block main %}
+    <h1>Settings</h1>
+    <div id="orders" style="display: block; height: 700px;">
+      <div class="content" id="scanner" style="width: fit-content; height: 100%; margin-right: 0;">
+        <h2 style="color: white;">Scanner</h2>
+        <div id="barcode-scanner"></div>
+        <div style="margin-top: 20px;">
+          <form action="" method="post">
+            <input type="text" id="userid"></input>
+            <input type="submit" id="submit" value="Submit" disabled>
+          </form>
+        </div>
+        <script src="{% static 'quagga.min.js' %}"></script>
+        <script src="{% static 'barcode.js' %}"></script>
+      </div>
+    </div>
+{% endblock %}

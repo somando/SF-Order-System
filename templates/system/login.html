@@ -1,0 +1,27 @@
+{% extends "system/layout.html" %}
+{% load static %}
+{% block title %}Sign In{{ block.super }}{% endblock %}
+{% block main %}
+<h1>Sign In</h1>
+<div id="message">
+{% for message in messages %}
+  <p>{{ message.priority }} {{ message.message }}</p>
+{% endfor %}
+</div>
+{% if request.user.is_authenticated %}
+  <div style="margin-top: 100px; font-size: 19px;">
+    <p>✅ 既にログイン済みです。</p>
+    <a href="{{ request.META.HTTP_REFERER }}" style=" color: white;">前のサービスへ戻る ></a>
+  </div>
+{% else %}
+  <form action="" method="post">
+    {% csrf_token %}
+    <h2>❌ 全ての機能にアクセスするにはログインが必要です。</h2>
+    <p class="formItem">User ID</p>
+    <input type="text" name="userid" placeholder="User ID" required>
+    <p class="formItem">Password</p>
+    <input type="password" name="password" placeholder="Password" required>
+    <p><input type="submit" value="Sign In"></p>
+  </form>
+{% endif %}
+{% endblock %}

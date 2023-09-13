@@ -1,0 +1,17 @@
+{% extends "system/layout.html" %}
+{% load static %}
+{% block main %}
+    <h1>Register</h1>
+      <div id="message">
+        {% for message in messages %}
+          <p>{{ message.priority }} {{ message.message }}</p>
+        {% endfor %}
+      </div>
+    <div class="pc">
+      {% block register %}
+      {% endblock %}
+    </div>
+    <div class="smartphone" style="margin-top: 100px; font-size: 19px;">
+      <p>❌ このメニューはスマホ版で<br>　 使用できません。</p>
+    </div>
+{% endblock %}

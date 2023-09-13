@@ -1,0 +1,26 @@
+{% extends "system/layout.html" %}
+{% load static %}
+{% block title %}Ticket{{ block.super }}{% endblock %}
+{% block main %}
+    <h1>Ticket</h1>
+    <div id="message">
+    {% for message in messages %}
+      <p>{{ message.priority }} {{ message.message }}</p>
+    {% endfor %}
+    </div>
+    <div id="orders" style="display: block;">
+      <div class="content" id="scanner">
+        <h2 style="color: white;">Scanner</h2>
+        <div id="barcode-scanner"></div>
+        <div id="ticketBarcodeValue" class="barcodeValue">
+          <form action="" method="post">
+            {% csrf_token %}
+            <input type="text" id="barcode" name='barcode' class="inputBarcode"></input>
+            <input type="submit" id="submit" value="Get">
+          </form>
+        </div>
+        <script src="{% static 'quagga.min.js' %}"></script>
+        <script src="{% static 'barcodeTicket.js' %}"></script>
+      </div>
+    </div>
+{% endblock %}

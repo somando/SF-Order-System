@@ -1,0 +1,25 @@
+{% extends "system/settings.html" %}
+{% load static %}
+{% block title %}{{ method }} Menu{{ block.super }}{% endblock %}
+{% block setting %}
+    <div class="setting">
+      <h2>{{ method }} Menu</h2>
+      <form action="" method="post">
+        {% csrf_token %}
+        <p class="formItem">Name</p>
+        <input type="text" name="name" placeholder="Name" value="{{ arr.0 }}" required>
+        <p class="formItem">Price</p>
+        <input type="number" name="price" placeholder="Number" value="{{ arr.1 }}" required>
+        <p class="formItem">Count</p>
+        <input type="number" name="count" placeholder="Number" value="{{ arr.2 }}" required>
+        <p class="formItem">Sold Out</p>
+        <input type="checkbox" name="soldout" value="selling" class="formCheck" style="display: none;" checked>
+        <input type="checkbox" name="soldout" value="soldout" class="formCheck"
+        {% if arr.3 == True %}
+        checked
+        {% endif %}>
+        <label>売り切れ表示にする</label>
+        <p><input type="submit" value="{{ method }}"></p>
+      </form>
+    </div>
+{% endblock %}

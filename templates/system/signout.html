@@ -1,0 +1,14 @@
+{% extends "system/layout.html" %}
+{% load static %}
+{% block title %}Login{{ block.super }}{% endblock %}
+{% block main %}
+<h1>Sign Out</h1>
+<div id="message">
+{% for message in messages %}
+  <p>{{ message.priority }} {{ message.message }}</p>
+{% endfor %}
+</div>
+<h2>✅ ログアウトしました。</h2>
+<a href="{% url 'system:login' %}" style="color: white;">ログインへ戻る ></a><br>
+<a href="{{ request.META.HTTP_REFERER }}" style=" color: white;">前のサービスへ戻る ></a>
+{% endblock %}

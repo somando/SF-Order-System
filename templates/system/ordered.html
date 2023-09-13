@@ -1,0 +1,51 @@
+{% extends "system/layout.html" %}
+{% load static %}
+{% block title %}Ordered{{ block.super }}{% endblock %}
+{% block main %}
+    <h1>Order</h1>
+    {% if soldout|length == 0 and order_data|length == 0 and message != 'None' %}
+      <p>✅前回のメッセージを消去し、更新しました。</p>
+    {% elif soldout|length == 0 and order_data|length == 0 %}
+      <p>❌商品が選択されていません。<br>　 注文をやり直してください。</p>
+    {% elif soldout|length == 0 %}
+      <p>✅すべての注文が正常に完了しました。</p>
+    {% elif order_data|length == 0 %}
+      <p>❌すべての商品の注文が売り切れのため、できませんでした。<br>　 お客様に確認し、再度注文を送信してください。<br>　 また、入力したメッセージは削除されますので、以下よりコピーしておくことを推奨します。</p>
+    {% else %}
+      <p>❌一部商品の注文が売り切れのため、できませんでした。<br>　 お客様に確認し、再度注文を送信してください。<br>　 また、入力したメッセージは削除されますので、以下よりコピーしておくことを推奨します。</p>
+    {% endif %}
+    <h2 style="margin-top: 50px;">注文内容</h2>
+    <p class="formItem">Table</p>
+    <p>　{{ table_name }}</p>
+    <p class="formItem">Time</p>
+    <p>　{{ now_time }}</p>
+    <p class="formItem">Menu</p>
+    <table border="1">
+      <tr>
+        <th class="tableCell">Menu</th>
+        <th class="tableCell">Count</th>
+      </tr>
+      {% for order in order_data %}
+        <tr>
+          <td class="tableCell">{{ order.0 }}</td>
+          <td class="tableCell">{{ order.1 }}</td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td class="tableCell" colspan="2">注文された商品がありません</td>
+        </tr>
+      {% endfor %}
+    </table>
+    <p class="formItem">Message</p>
+    <p>　{{ message }}</p>
+    <div id="settingMenu" style="margin-top: 40px">
+      <ul style="padding: 0;">
+        <li><a href="/order/">Back to Order</a></li>
+      </ul>
+    </div>
+    <script>
+    {% for item in soldout %}
+      alert("{{ item }}の注文が売り切れのため、できませんでした。");
+    {% endfor %}
+    </script>
+{% endblock %}
