@@ -31,7 +31,7 @@
           <p class="formItem">Used</p>
           <input type="checkbox" name="used" value="noUsed" class="formCheck" style="display: none;" checked>
           <input type="checkbox" name="used" value="used" class="formCheck"
-          {% if arr.3 == True %}
+          {% if arr.3 != false %}
           checked
           {% endif %}>
           <label>チケットを使用済みにする</label>
