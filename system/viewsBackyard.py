@@ -26,6 +26,7 @@ def backyard(request):
         tables = tableData.objects.all()
         for table in tables:
             order_detail.append([table.id, table.name, [], table.message])
+        order_detail.sort(reverse=False, key=lambda x:x[0])
         menus = menuData.objects.all()
         orders = orderData.objects.all()
         for order in orders:

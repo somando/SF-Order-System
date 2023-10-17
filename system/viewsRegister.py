@@ -26,6 +26,7 @@ def registerTop(request):
         table = tableData.objects.all()
         for i in table:
             tables.append(i)
+        tables.sort(key=lambda item:item.id)
         return render(request, 'system/registerTop.html', {
             "messages": messages,
             "tables": tables
@@ -53,6 +54,7 @@ def registerTable(request, id):
             table = tableData.objects.all()
             for i in table:
                 tables.append(i)
+            tables.sort(key=lambda item:item.id)
             table = tableData.objects.get(id = id)
             orders = []
             order_data = orderData.objects.all()

@@ -80,82 +80,6 @@ def deleteOrder(request, id):
         return render(request, 'system/noroleSetting.html')
 
 @login_required
-def addMember(request):
-    username = request.user.username
-    if username in user_admin:
-        if request.method == "GET":
-            arr = ["", "", "", False, False]
-            return render(request, 'system/addMember.html', {
-                "arr": arr,
-                "method": "Create"
-            })
-        else:
-            name = request.POST['name']
-            number = request.POST['number']
-            barcode = request.POST['barcode']
-            admin = request.POST['admin']
-            work = request.POST['work']
-            if admin == 'Admin':
-                admin = True
-            else:
-                admin = False
-            if work == 'working':
-                work = True
-            else:
-                work = False
-            memberData.objects.create(name = name, member_no = int(number), barcode = barcode, work = work, admin = admin)
-            return redirect('/settings/member/')
-    else:
-        return render(request, 'system/noroleSetting.html')
-
-@login_required
-def editMember(request, id):
-    username = request.user.username
-    if username in user_admin:
-        member = memberData.objects.get(id = id)
-        if request.method == "GET":
-            arr = ["", "", "", False, False]
-            arr[0] = member.name
-            arr[1] = member.member_no
-            arr[2] = member.barcode
-            arr[3] = member.admin
-            arr[4] = member.work
-            return render(request, 'system/addMember.html', {
-                "arr": arr,
-                "method": "Update"
-            })
-        else:
-            member.name = request.POST['name']
-            member.member_no = request.POST['number']
-            member.barcode = request.POST['barcode']
-            admin = request.POST['admin']
-            work = request.POST['work']
-            if admin == 'Admin':
-                admin = True
-            else:
-                admin = False
-            if work == 'working':
-                work = True
-            else:
-                work = False
-            member.admin = admin
-            member.work = work
-            member.save()
-            return redirect('/settings/member/')
-    else:
-        return render(request, 'system/noroleSetting.html')
-
-@login_required
-def deleteMember(request, id):
-    username = request.user.username
-    if username in user_admin:
-        member = memberData.objects.get(id = id)
-        member.delete()
-        return redirect('/settings/member/')
-    else:
-        return render(request, 'system/noroleSetting.html')
-
-@login_required
 def addMenu(request):
     username = request.user.username
     if username in user_admin:
@@ -307,25 +231,28 @@ def addTicket(request):
             menu = request.POST['menu']
             barcode = request.POST['barcode']
             available = request.POST['available']
+            numstart = int(request.POST['numstart'])
+            numfinish = int(request.POST['numfinish'])
             tickets = ticketData.objects.all()
-            unique = True
-            for ticket in tickets:
-                if ticket.barcode == barcode:
-                    unique = False
-            if available == 'available':
-                available = True
-            else:
-                available = False
-            used = request.POST['used']
-            if used == 'used':
-                used = True
-            else:
-                used = False
-            if unique == True:
-                ticketData.objects.create(menu_id = menu, barcode = barcode, available = available, used = used)
-                return redirect('/settings/ticket/')
-            else:
-                return render(request, 'system/ticketFail.html')
+            for i in range(numstart, numfinish + 1):
+                unique = True
+                for ticket in tickets:
+                    if ticket.barcode == barcode:
+                        unique = False
+                if available == 'available':
+                    availableTF = True
+                else:
+                    availableTF = False
+                used = request.POST['used']
+                if used == 'used':
+                    used = True
+                else:
+                    used = False
+                if unique == True:
+                    ticketData.objects.create(menu_id = menu, barcode = barcode + str(i).zfill(3), available = availableTF, used = used)
+                else:
+                    return render(request, 'system/ticketFail.html')
+            return redirect('/settings/ticket/')
     else:
         return render(request, 'system/noroleSetting.html')
 
@@ -380,79 +307,6 @@ def deleteTicket(request, id):
         return render(request, 'system/noroleSetting.html')
 
 @login_required
-def addShift(request):
-    username = request.user.username
-    if username in user_admin:
-        if request.method == "GET":
-            shifts = []
-            shift = shiftData.objects.all()
-            for i in shift:
-                shifts.append(i)
-            arr = []
-            members = []
-            member = memberData.objects.all()
-            for i in member:
-                members.append(i)
-            return render(request, 'system/addShift.html', {
-                "arr": arr,
-                "shifts": shifts,
-                "members": members,
-                "method": "Create"
-            })
-        else:
-            member = request.POST['member']
-            start = request.POST['start']
-            finish = request.POST['finish']
-            shiftData.objects.create(member_id = member, start = start, finish = finish)
-            return redirect('/settings/shift/')
-    else:
-        return render(request, 'system/noroleSetting.html')
-
-@login_required
-def editShift(request, id):
-    username = request.user.username
-    if username in user_admin:
-        shift = shiftData.objects.get(id = id)
-        if request.method == "GET":
-            arr = ["", "", ""]
-            arr[0] = shift.member_id
-            start = str(shift.start + datetime.timedelta(hours = 9))
-            start = start.replace(" ", "T")
-            start = start.replace(":00+00:00", "")
-            arr[1] = start
-            finish = str(shift.finish + datetime.timedelta(hours = 9))
-            finish = finish.replace(" ", "T")
-            finish = finish.replace(":00+00:00", "")
-            arr[2] = finish
-            members = []
-            member = memberData.objects.all()
-            for i in member:
-                members.append(i)
-            return render(request, 'system/addShift.html', {
-                "arr": arr,
-                "members": members,
-                "method": "Update"
-            })
-        else:
-            shift.member_id = request.POST['member']
-            shift.start = request.POST['start']
-            shift.finish = request.POST['finish']
-            shift.save()
-            return redirect('/settings/shift/')
-    else:
-        return render(request, 'system/noroleSetting.html')
-
-@login_required
-def deleteShift(request, id):
-    username = request.user.username
-    if username in user_admin:
-        shift = shiftData.objects.get(id = id)
-        shift.delete()
-        return redirect('/settings/shift/')
-    else:
-        return render(request, 'system/noroleSetting.html')
-
-@login_required
 def addForWorker(request):
     if request.method == "GET":
         arr = []
@@ -498,6 +352,7 @@ def setting(request, menu):
         message = forWorkerData.objects.all()
         for i in message:
             messages.append(i)
+        messages.sort(key=lambda item:item.id)
         return render(request, 'system/setforworker.html', {
             "messages": messages
         })
@@ -508,6 +363,7 @@ def setting(request, menu):
             orders = orderData.objects.all()
             for order in orders:
                 order_data.append(order)
+            order_data.sort(key=lambda item:item.id)
             tables = []
             table = tableData.objects.all()
             for i in table:
@@ -521,19 +377,12 @@ def setting(request, menu):
                 "tables": tables,
                 "menus": menus
             })
-        elif menu == 'member':
-            member_data = []
-            members = memberData.objects.all()
-            for member in members:
-                member_data.append(member)
-            return render(request, 'system/setmember.html', {
-                "member_data": member_data
-            })
         elif menu == 'menu':
             menu_data = []
             menus = menuData.objects.all()
             for menu in menus:
                 menu_data.append(menu)
+            menu_data.sort(key=lambda item:item.id)
             return render(request, 'system/setmenu.html', {
                 "menu_data": menu_data
             })
@@ -542,13 +391,9 @@ def setting(request, menu):
             tables = tableData.objects.all()
             for table in tables:
                 table_data.append(table)
-            menus = []
-            menu_data = menuData.objects.all()
-            for menu in menu_data:
-                menus.append(menu)
+            table_data.sort(key=lambda item:item.id)
             return render(request, 'system/settable.html', {
                 "table_data": table_data,
-                "menus": menus
             })
         elif menu == 'ticket':
             menus = []
@@ -559,22 +404,10 @@ def setting(request, menu):
             tickets = ticketData.objects.all()
             for ticket in tickets:
                 ticket_data.append(ticket)
+            ticket_data.sort(key=lambda item:item.id)
             return render(request, 'system/setticket.html', {
                 "ticket_data": ticket_data,
                 "menus": menus
-            })
-        elif menu == 'shift':
-            shifts = []
-            shift_data = shiftData.objects.all()
-            for shift in shift_data:
-                shifts.append(shift)
-            members = []
-            member_data = memberData.objects.all()
-            for member in member_data:
-                members.append(member)
-            return render(request, 'system/setshift.html', {
-                "members": members,
-                "shifts": shifts
             })
     else:
         return render(request, 'system/noroleSetting.html')

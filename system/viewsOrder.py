@@ -22,10 +22,12 @@ def order(request):
     menu = menuData.objects.all()
     for i in menu:
         menus.append(i)
+    menus.sort(key=lambda item:item.id)
     tables = []
     table = tableData.objects.all()
     for i in table:
         tables.append(i)
+    tables.sort(key=lambda item:item.id)
     if request.method == "GET":
         messages = []
         message = forWorkerData.objects.all()
@@ -35,6 +37,7 @@ def order(request):
         order_data = orderData.objects.all()
         for order in order_data:
             orders.append(order)
+        orders.sort(key=lambda item:item.id)
         return render(request, 'system/order.html', {
             "orders": orders,
             "tables": tables,

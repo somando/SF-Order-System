@@ -9,23 +9,11 @@ class userAccount(models.Model):
   def __str__(self):
     return self.user.username
 
-class memberData(models.Model):
-  name = models.CharField(max_length=50)
-  member_no = models.IntegerField()
-  barcode = models.CharField(max_length=15, unique=True)
-  work = models.BooleanField()
-  admin = models.BooleanField()
-
 class menuData(models.Model):
   name = models.CharField(max_length=100)
   price = models.IntegerField()
   count = models.IntegerField()
   soldout = models.BooleanField()
-
-class memberScanData(models.Model):
-  member_id = models.IntegerField()
-  datetime = models.DateTimeField()
-  work = models.BooleanField()
 
 class ticketData(models.Model):
   menu_id = models.IntegerField()
@@ -52,8 +40,3 @@ class tableData(models.Model):
 class forWorkerData(models.Model):
   message = models.CharField(max_length=500)
   priority = models.CharField(max_length=10)
-
-class shiftData(models.Model):
-  member_id = models.IntegerField()
-  start = models.DateTimeField()
-  finish = models.DateTimeField()
