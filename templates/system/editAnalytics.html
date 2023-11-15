@@ -1,0 +1,16 @@
+{% extends "system/settings.html" %}
+{% load static %}
+{% block title %}{{ method }} Table{{ block.super }}{% endblock %}
+{% block setting %}
+    <div class="setting">
+      <h2>{{ method }} Analytics</h2>
+      <form action="" method="post">
+        {% csrf_token %}
+        <p class="formItem">Price</p>
+        <input type="number" name="price" placeholder="Price" value="{{ arr.0 }}" required>
+        <p class="formItem">Discount</p>
+        <input type="number" name="discount" placeholder="Discount" value="{{ arr.1 }}" required>
+        <p><input type="submit" value="{{ method }}"></p>
+      </form>
+    </div>
+{% endblock %}

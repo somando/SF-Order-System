@@ -1,0 +1,31 @@
+{% extends "system/layout.html" %}
+{% load static %}
+{% load humanize %}
+{% block title %}Analytics{{ block.super }}{% endblock %}
+{% block main %}
+    <script src="{% static 'order.js' %}"></script>
+    <h1>Analytics</h1>
+    <div id="message">
+    {% for message in messages %}
+      <p>{{ message.priority }} {{ message.message }}</p>
+    {% endfor %}
+    </div>
+    <div class="orders">
+      <div class="analyticsColumn">
+        <h2>今までの売り上げ</h2>
+        <p><span id="regiPriceNum">{{ price| intcomma }}</span> 円</p>
+      </div>
+      <div class="analyticsColumn">
+        <h2>今までの注文数</h2>
+        <p><span id="regiPriceNum">{{ order| intcomma }}</span> 件</p>
+      </div>
+      <div class="analyticsColumn">
+        <h2>使用された前売り券</h2>
+        <p><span id="regiPriceNum">{{ ticket| intcomma }}</span> 枚</p>
+      </div>
+      <div class="analyticsColumn">
+        <h2>値引きした累計額</h2>
+        <p><span id="regiPriceNum">{{ discount| intcomma }}</span> 円</p>
+      </div>
+    </div>
+{% endblock %}

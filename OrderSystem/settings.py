@@ -153,4 +153,4 @@ STATICFILES_DIRS = (
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CSRF_TRUSTED_ORIGINS = ['https://dfb4-240a-61-2c25-22e7-a017-3533-5f68-59d.ngrok-free.app']
+CSRF_TRUSTED_ORIGINS = ['https://7c58-49-97-88-41.ngrok-free.app']

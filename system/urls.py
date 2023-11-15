@@ -4,9 +4,7 @@ from . import (
     viewsBackyard,
     viewsOrder,
     viewsRegister,
-    viewsTicket,
-    viewsMember,
-    viewsShift,
+    viewsAnalytics,
     viewsSettings
 )
 
@@ -24,6 +22,8 @@ urlpatterns = [
     path('register/ticket/', viewsRegister.useTicket, name="useTicket"),
     path('register/discount/', viewsRegister.discount, name="useTicket"),
     path('register/next/', viewsRegister.registerNext, name="useTicket"),
+    path('analytics/', viewsAnalytics.analytics, name="analytics"),
+    path('analytics/format/', viewsAnalytics.formatAnalytics, name="analyticsSet"),
     path('settings/', viewsSettings.settings, name='settings'),
     path('settings/<slug:menu>/', viewsSettings.setting, name='settings'),
     path('settings/order/edit/<int:id>/', viewsSettings.editOrder, name='addMember'),
@@ -40,5 +40,6 @@ urlpatterns = [
     path('settings/message/add/', viewsSettings.addForWorker, name='addMember'),
     path('settings/message/edit/<int:id>/', viewsSettings.editForWorker, name='addMember'),
     path('settings/message/delete/<int:id>', viewsSettings.deleteForWorker, name='addMember'),
+    path('settings/analytics/edit/', viewsSettings.analytics, name='settingAnalytics'),
     path('csrf_token/', views.csrf_token, name="csrf_token"),
 ]

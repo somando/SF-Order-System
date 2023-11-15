@@ -430,3 +430,7 @@ textarea {
     transform: 0;
   }
 }
+
+.analyticsColumn {
+  padding-top: 15px;
+}

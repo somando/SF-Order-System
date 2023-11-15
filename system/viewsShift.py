@@ -10,10 +10,6 @@ load_dotenv()
 # Create your views here.
 
 user_admin = ['soma']
-user_ticket = []
-
-for i in user_admin:
-    user_ticket.append(i)
 
 @login_required
 def shift(request):

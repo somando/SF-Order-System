@@ -40,3 +40,7 @@ class tableData(models.Model):
 class forWorkerData(models.Model):
   message = models.CharField(max_length=500)
   priority = models.CharField(max_length=10)
+
+class analyticsData(models.Model):
+  price = models.IntegerField()
+  discount = models.IntegerField()

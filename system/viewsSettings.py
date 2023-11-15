@@ -342,6 +342,30 @@ def deleteForWorker(request, id):
     return redirect('/settings/message/')
 
 @login_required
+def analytics(request):
+    if request.method == "GET":
+        analyticses = analyticsData.objects.all()
+        for i in analyticses:
+            id = i.id
+            break
+        analytics = analyticsData.objects.get(id = id)
+        arr = [analytics.price, analytics.discount]
+        return render(request, 'system/editAnalytics.html', {
+            "arr": arr,
+            "method": "Update"
+        })
+    else:
+        analyticses = analyticsData.objects.all()
+        for i in analyticses:
+            id = i.id
+            break
+        analytics = analyticsData.objects.get(id = id)
+        analytics.price = int(request.POST['price'])
+        analytics.discount = int(request.POST['discount'])
+        analytics.save()
+        return redirect('/settings/analytics/edit/')
+
+@login_required
 def settings(request):
     return redirect('/settings/message/')
 

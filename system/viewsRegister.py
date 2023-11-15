@@ -79,15 +79,30 @@ def registerTable(request, id):
             tableid = int(request.POST['table'])
             orders = orderData.objects.all()
             use = False
+            menus = []
+            menu = menuData.objects.all()
+            for i in menu:
+                menus.append(i)
+            analytics = analyticsData.objects.all()
+            for i in analytics:
+                id = i.id
+                break
+            analytics = analyticsData.objects.get(id = id)
             for i in orders:
                 if i.table_id == tableid:
                     order = orderData.objects.get(id = i.id)
                     if order.next == False and i.provide == True:
                         order.checkout = True
+                        for menu in menus:
+                            if menu.id == order.menu_id:
+                                price = menu.price
+                                break
+                        analytics.price += price * order.count
                     else:
                         use = True
                         order.next = False
                     order.save()
+            analytics.save()
             table = tableData.objects.get(id = tableid)
             table.use = use
             table.ticket_price = 0
@@ -136,6 +151,13 @@ def discount(request):
             table = tableData.objects.get(id = tableid)
             table.discount += int(discount)
             table.save()
+            analytics = analyticsData.objects.all()
+            for i in analytics:
+                id = i.id
+                break
+            analytics = analyticsData.objects.get(id = id)
+            analytics.discount += int(discount)
+            analytics.save()
             return redirect('/register/' + tableid)
     else:
         return render(request, 'system/norole.html', {
