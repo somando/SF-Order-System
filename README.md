@@ -66,4 +66,5 @@ DjangoアプリケーションのデプロイにはApacheにmod_wsgiが必要で
 
 ## Documents
 使用などをまとめたPDFは下記リンクから使用できます。
-[オーダーシステム 使い方説明]()
+
+[オーダーシステム 使い方説明](ordersystem.pdf)
