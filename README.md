@@ -6,7 +6,7 @@
 ## Detail
 このシステムの技術仕様について
 
-###　Framework
+### Framework
  - Django
  - Apache
 
