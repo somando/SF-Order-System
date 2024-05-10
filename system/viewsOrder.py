@@ -72,9 +72,9 @@ def order(request):
             message = "None"
         table.message = message
         table.save()
-        if len(order_data) > 0:
-            line_message = '\n新規オーダーを受け付けました。\nBackyardページをリロードしてください。'
-            lineNotify(line_message)
+        # if len(order_data) > 0:
+            # line_message = '\n新規オーダーを受け付けました。\nBackyardページをリロードしてください。'
+            # lineNotify(line_message)
         return render(request, 'system/ordered.html', {
             "order_data": order_data,
             "now_time": now_time,
