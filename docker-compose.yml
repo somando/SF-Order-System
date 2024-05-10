@@ -1,5 +1,6 @@
 services:
   app:
+    image: sf-order-app
     container_name: sf-order-app
     build: 
       context: .
@@ -9,6 +10,7 @@ services:
       - db
 
   web:
+    image: sf-order-web
     container_name: sf-order-web
     build:
       context: .
@@ -19,6 +21,7 @@ services:
       - app
   
   db:
+    image: sf-order-db
     container_name: sf-order-db
     build:
       context: .
